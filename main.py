@@ -1,7 +1,9 @@
 import json
-import requests
 import os
+import sys
 from datetime import date as dt
+
+import requests
 
 
 def get_files(imgDirectory):
@@ -129,7 +131,7 @@ def main_(inputDir, outputDir):
 
 if __name__ == "__main__":
 
-    inputDir = "data/"
-    outputDir = "output/"
+    inputDir = sys.argv[1]
+    outputDir = sys.argv[2]
 
     main_(inputDir, outputDir)
