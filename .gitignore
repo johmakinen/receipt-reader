@@ -1,3 +1,7 @@
+# Additional:
+data/ # For shopping receipt image files (personal shopping receipts kept secret)
+output/ # For the outputs of the tool (again, personal shopping receipts kept secret)
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
