@@ -5,6 +5,14 @@ from datetime import date as dt
 
 
 def get_files(imgDirectory):
+    """Gets all the files in your desired folder. These files should be the photos/files of the receipts.
+
+    Args:
+        imgDirectory (str):
+
+    Returns:
+        list: list of filenames
+    """
     # list file and directories
     res = os.listdir(imgDirectory)
     print("Files: ", res)
@@ -72,16 +80,23 @@ def rw_to_file(output_, output_path_full):
             )
 
 
-if __name__ == "__main__":
-
-    path_to_data = "data/"
+def main_(inputDir, outputDir):
     inputFileNames = get_files(path_to_data)
-    # Name of the image file
-    # imgFile = "data/2022-09-24 16.48.26.jpg"
-    outputFolder = "output/"
+
+    if not os.path.exists(outputFolder):
+        os.makedirs(outputFolder)
+
     for file in inputFileNames:
         fileName_wout_ext = os.path.splitext(file)[0]
         json_out = outputFolder + fileName_wout_ext + ".json"
         tab_out = outputFolder + fileName_wout_ext + ".txt"
-        # ocr(path_to_data + file, json_out)
+        ocr(path_to_data + file, json_out)
         rw_to_file(json_out, tab_out)
+
+
+if __name__ == "__main__":
+
+    path_to_data = "data/"
+    outputFolder = "output/"
+
+    main_(path_to_data, outputFolder)
