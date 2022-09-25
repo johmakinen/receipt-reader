@@ -31,7 +31,7 @@ def ocr(fileName, outputName):
     url = "https://ocr.asprise.com/api/v1/receipt"
 
     # Make a request to the ASPRISE OCR API
-    # Note, there are limited number of requests for th etest user per day.
+    # Note, there are limited number of requests for the test user per day.
     res = requests.post(
         url,
         data={"api_key": "TEST", "recognizer": "auto", "ref_no": "oct_python_123"},
