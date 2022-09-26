@@ -62,19 +62,24 @@ def rw_to_file(output_, output_path_full):
 
     # Take the items and costs
     date = data["receipts"][0]["date"]
+    if not date:
+        date = output_.split("/")[1].split(" ")[0]
     items = data["receipts"][0]["items"]
     item_list = [item["description"] for item in items]
     amounts = [item["amount"] for item in items]
 
     # In Europe/Finland, we have the pant system for beverages.
     # This combines the beverage price and pant into one element
-    pantti = [i for i, s in enumerate(item_list) if "pantti" in s.lower()]
+    # This also takes into account discounts, which should be marked with negative costs.
+    discounts = [i for i, s in enumerate(item_list) if "discounts" in s.lower()]
+    discounts.extend([i for i, elem in enumerate(amounts) if elem < 0])
+    discounts = list(set(discounts))
 
-    for i in pantti:
+    for i in discounts:
         amounts[i - 1] = amounts[i - 1] + amounts[i]
-        del item_list[i]
-    for i in pantti:
-        del amounts[i]
+
+    item_list = [elem for i, elem in enumerate(item_list) if i not in discounts]
+    amounts = [elem for i, elem in enumerate(amounts) if i not in discounts]
 
     # Write the output into a separate text file
     with open(output_path_full, "w") as f:
