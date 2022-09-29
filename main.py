@@ -71,7 +71,7 @@ def rw_to_file(output_, output_path_full):
     # In Europe/Finland, we have the pant system for beverages.
     # This combines the beverage price and pant into one element
     # This also takes into account discounts, which should be marked with negative costs.
-    discounts = [i for i, s in enumerate(item_list) if "discounts" in s.lower()]
+    discounts = [i for i, s in enumerate(item_list) if "pantti" in s.lower()]
     discounts.extend([i for i, elem in enumerate(amounts) if elem < 0])
     discounts = list(set(discounts))
 
@@ -123,7 +123,7 @@ def main_(inputDir, outputDir):
         tab_out = outputDir + fileName_wout_ext + ".txt"
 
         # OCR API call and save to json file
-        OK = ocr(inputDir + file, json_out)
+        OK = 1  # ocr(inputDir + file, json_out)
 
         # OCR API quota exceeded, break
         if not OK:
