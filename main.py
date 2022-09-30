@@ -123,7 +123,7 @@ def main_(inputDir, outputDir):
         tab_out = outputDir + fileName_wout_ext + ".txt"
 
         # OCR API call and save to json file
-        OK = 1  # ocr(inputDir + file, json_out)
+        OK = ocr(inputDir + file, json_out)
 
         # OCR API quota exceeded, break
         if not OK:
